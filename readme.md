@@ -88,3 +88,30 @@ class ListandoFotografias(admin.ModelAdmin):
     list_display_links = ("id","nome")
     search_fields = ("nome",)
 ```
+
+# 3 - Avançando no admin
+
+Adicionar **filtro** no grid
+
+```
+list_filter = ("categoria",)
+```
+
+Adicionar **paginação** no grid
+
+```
+list_per_page = 1
+```
+
+Adicionar coluna **editavel** no grid
+
+```
+list_editable = ("publicada",)
+```
+
+Ordenar e filtrar na tela  
+Alterar no arquivo **galeria/views.py**
+
+```
+fotografias = Fotografia.objects.order_by("-data_fotografia").filter(publicada=True)
+```

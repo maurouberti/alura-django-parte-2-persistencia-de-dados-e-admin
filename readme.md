@@ -115,3 +115,26 @@ Alterar no arquivo **galeria/views.py**
 ```
 fotografias = Fotografia.objects.order_by("-data_fotografia").filter(publicada=True)
 ```
+
+# 4 - Imagens e filtros
+
+Criar diretório de **media**  
+Alterar arquivo **setup/settings.py**  
+
+```
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"
+```
+
+Alterar arquivo **settings/urls.py**
+
+```
+...
++ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+```
+
+Alterar arquivo **galeria/models.py**
+
+```
+foto = models.ImageField(upload_to="fotos/%Y/%m/%d/", blank=True)
+```

@@ -38,3 +38,53 @@ INSTALLED_APPS = [
     'galeria.apps.GaleriaConfig',
 ]
 ```
+
+# 2 - Admin
+
+Alterar arquivo **galeria/views.py**  
+Passar as fotografias para o **templates/galeria/index.html**
+
+```
+def index(request):
+    fotografias = Fotografia.objects.all()
+    return render(request, 'galeria/index.html', {"cards": fotografias})
+```
+
+Colocar comando `for` nos cards do **templates/galeria/index.html**
+
+```
+{% for fotografia in cards %}
+...
+{% endfor %}
+```
+
+## Admin
+
+Criar usuário
+
+```
+python manage.py createsuperuser
+```
+
+Acessar
+
+```
+http://127.0.0.1:8000/admin
+```
+
+Habilitar model Fotograrfia no admin.  
+Alterar arquivo **galeria/admin.py**
+
+```
+from galeria.models import Fotografia
+admin.site.register(Fotografia)
+```
+
+Adicionar configurações no grid
+
+```
+class ListandoFotografias(admin.ModelAdmin):
+    list_display = ("id", "nome", "legenda")
+    list_display_links = ("id","nome")
+    search_fields = ("nome",)
+```
